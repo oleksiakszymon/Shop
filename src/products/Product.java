@@ -2,8 +2,8 @@ package products;
 
 public class Product implements Comparable<Product> {
 
-        private String name;
-        private double price;
+        protected String name;
+        protected double price;
 
     public String getName() {
         return name;
@@ -23,15 +23,15 @@ public class Product implements Comparable<Product> {
 
     public Product() {}
 
-        public Product(String name, double price) {
-            this.name = name;
-            this.price = price;
-        }
+    public Product(String name, double price) {
+           this.name = name;
+           this.price = price;
+    }
 
-        public Product(Product product){
-            this.name = product.name;
-            this.price = product.price;
-        }
+    public Product(Product product){
+        this.name = product.name;
+        this.price = product.price;
+    }
 
     @Override
     public int compareTo(Product o) {

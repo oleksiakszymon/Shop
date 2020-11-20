@@ -24,9 +24,9 @@ public class Shop {
         productsList.add(new Drinks("Cola", 4.99, 1.75));
         productsList.add(new Drinks("Cola", 3.50, 1));
         productsList.add(new Drinks("Juice", 2.99, 1.5));
-        productsList.add(new Fruits("Banana", 5.99, 0));
-        productsList.add(new Fruits("Apple", 2.99, 0 ));
-        productsList.add(new Fruits("Peach", 6.99, 0 ));
+        productsList.add(new Fruits("Banana", 0,5.99, 0));
+        productsList.add(new Fruits("Apple", 0,2.99, 0 ));
+        productsList.add(new Fruits("Peach", 0, 6.99, 0 ));
 
     }
     public Product getByIndex(int index) {
@@ -37,7 +37,12 @@ public class Shop {
         for (Product e : productsList) {
             i++;
             System.out.print(i + " " + e.getName() + " - ");
-            System.out.print("Price: " + e.getPrice() + "$ \n");
+            if(e instanceof Fruits){
+
+                System.out.print("Price: " + ((Fruits) e).getPricePerKg() + "$ \n");
+            } else {
+                System.out.print("Price: " + e.getPrice() + "$ \n");
+            }
         }
         System.out.println();
     }

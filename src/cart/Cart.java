@@ -11,8 +11,6 @@ public class Cart {
 
     public void addToCart(Product product) {
             Product addedProduct = new Product(product);
-            //jesli ma wagę/jest z klasy Fruits
-            //addedProduct.setPrice(product.getPrice() * product.getWeight);
             cart.add(addedProduct);
             totalPrice = totalPrice + addedProduct.getPrice();
 }

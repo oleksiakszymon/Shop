@@ -4,6 +4,7 @@ import products.Product;
 import creator.Shop;
 import cart.Cart;
 import comunication.Output;
+import products.categories.Fruits;
 import produtctComparators.ProductNameComparator;
 import produtctComparators.ProductPriceComparator;
 
@@ -18,6 +19,7 @@ public class Main {
         Cart cart = new Cart();
         Shop shop = new Shop();
         Output output = new Output();
+        String index;
 
         shop.createProductsList();
 
@@ -31,47 +33,49 @@ public class Main {
             String number = scan.nextLine();
 
             switch (Integer.parseInt(number)) {
-
-                case 1: //Showing products
+//Showing products
+                case 1 -> {
                     output.sortBy();
-                    String index = scan.nextLine();
-                    switch(Integer.parseInt(index)){
-                        case 1: //Name ascending
-                            Collections.sort(shop.productsList, new ProductNameComparator());
-                            break;
-                        case 2: //Name descending
-                            Collections.sort(shop.productsList, new ProductNameComparator().reversed());
-                            break;
-                        case 3: //Price asending
-                            Collections.sort(shop.productsList, new ProductPriceComparator());
-                            break;
-                        case 4: //Price descending
-                            Collections.sort(shop.productsList, new ProductPriceComparator().reversed());
+                    index = scan.nextLine();
+                    switch (Integer.parseInt(index)) {
+//Name ascending
+                        case 1 -> shop.productsList.sort(new ProductNameComparator());
+//Name descending
+                        case 2 -> shop.productsList.sort(new ProductNameComparator().reversed());
+//Price ascending
+                        case 3 -> shop.productsList.sort(new ProductPriceComparator());
+//Price descending
+                        case 4 -> shop.productsList.sort(new ProductPriceComparator().reversed());
                     }
                     shop.showProductList();
-                    break;
-
-                case 2: //Adding to cart
+                }
+//Adding to cart
+                case 2 -> {
                     System.out.println("Which product do you want to add to your cart?");
                     shop.showProductList();
                     index = scan.nextLine();
                     Product chosen = shop.getByIndex(Integer.parseInt(index));
+                    if(chosen instanceof Fruits){
+                        System.out.println("Insert weight");
+                        String input = scan.nextLine();
+                        ((Fruits) chosen).setWeight(Double.parseDouble(input));
+                    }
                     cart.addToCart(chosen);
-                    break;
-                case 3: // Removing from cart
+                }
+// Removing from cart
+                case 3 -> {
                     cart.showCart();
                     System.out.println("Which product do you want to remove?");
                     String index1 = scan.nextLine();
                     System.out.println("What amount do you want to remove");
-                    cart.removeFromCart(cart.cart.get(Integer.parseInt(index1)-1));
-                    break;
-                case 4: // Showing cart and summary price
+                    cart.removeFromCart(cart.cart.get(Integer.parseInt(index1) - 1));
+                }
+// Showing cart and summary price
+                case 4 -> {
                     cart.showCart();
                     System.out.println("Summary price: " + Cart.totalPrice + "$");
-                    break;
-                case 5:
-                    process = false;
-                    break;
+                }
+                case 5 -> process = false;
             }
         }
     }
