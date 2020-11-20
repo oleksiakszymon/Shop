@@ -9,52 +9,25 @@ public class Cart {
     public ArrayList<Product> cart = new ArrayList<>();
     public static double totalPrice = 0;
 
-    public void addToCart(Product product, int amount) {
-        if(amount > product.amount){
-            System.out.println("Not in stock");
-        } else {
+    public void addToCart(Product product) {
             Product addedProduct = new Product(product);
-            addedProduct.amount = amount;
+            //jesli ma wagę/jest z klasy Fruits
+            //addedProduct.setPrice(product.getPrice() * product.getWeight);
             cart.add(addedProduct);
-            product.amount = product.amount - amount;
-            totalPrice = totalPrice + (addedProduct.price * amount);
-        }
-    // }
-//            if(amount > product.amount){
-//            System.out.println("Not in stock");
-//            } else {
-//            Product addedProduct = new Product(product);
-//            for (Product e : cart) {
-//                if (e.name == addedProduct.name && !cart.isEmpty()) {
-//                    int index = cart.indexOf(e);
-//                    cart.get(index).amount = cart.get(index).amount + amount;
-//                } else {
-//                    cart.add(addedProduct);
-//                    addedProduct.amount = amount;
-//                }
-//            }
-//            product.amount = product.amount - amount;
-//            totalPrice = totalPrice + (addedProduct.price * amount);
-//            }
+            totalPrice = totalPrice + addedProduct.getPrice();
 }
 
     public void showCart(){
         int i=0;
         for(Product e : cart){
             i++;
-            System.out.println(i + ". " + e.name + " (" + e.amount + ")");
+            System.out.println(i + ". " + e.getName());
         }
         System.out.println();
     }
 
-    public void removeFromCart(Product product, int amount) {
-        if(amount < product.amount){
-            product.amount = product.amount - amount;
-            totalPrice = totalPrice - (product.price * amount);
-        } else {
+    public void removeFromCart(Product product) {
             cart.remove(product);
-            totalPrice = totalPrice - (product.price * product.amount);
-            product.amount = 0;
+            totalPrice = totalPrice - product.getPrice();
         }
     }
-}

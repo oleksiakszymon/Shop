@@ -1,21 +1,50 @@
 package products;
 
-public class Product {
+public class Product implements Comparable<Product> {
 
-        public String name;
-        public double price;
-        public int amount;
+        private String name;
+        private double price;
 
-        public Product(String name, double price, int amount) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Product() {}
+
+        public Product(String name, double price) {
             this.name = name;
             this.price = price;
-            this.amount = amount;
         }
 
         public Product(Product product){
             this.name = product.name;
             this.price = product.price;
-            this.amount = product.amount;
         }
 
+    @Override
+    public int compareTo(Product o) {
+            int result = this.name.compareTo(o.name);
+        return result;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
